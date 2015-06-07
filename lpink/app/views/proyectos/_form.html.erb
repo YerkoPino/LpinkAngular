@@ -1,0 +1,46 @@
+<div style="width:60%;margin:0 auto">
+<%= form_for(@proyecto) do |f| %>
+  <% if @proyecto.errors.any? %>
+    <div id="error_explanation">
+      <!--<h2><%= pluralize(@proyecto.errors.count, "error") %> prohibited this proyecto from being saved:</h2>-->      
+      <p class="alert alert-danger" align="center" style="text-align:center">
+      <% @proyecto.errors.full_messages.each do |message| %>
+        <%= message %><br>
+      <% end %>
+      </p>
+      <br>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Nombre" %>
+    <%= f.text_field "proyecto_nombre" %>
+  </div>
+  <div class="field">
+    <%= f.label "Descripción" %>
+    <%= f.text_field :descripcion %>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <div class="field" style="width:50%">
+          <%= f.label :fecha_inicio %>
+          <%= f.date_select :fecha_inicio, {:use_month_names => ["Enero","Febrero","Marzo","Abirl","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]},:type => "date", :class => "datepicker" %>
+        </div>
+      </td>
+      <td >
+        <div class="field" style="width:50%">
+          <%= f.label :fecha_fin %>
+          <%= f.date_select :fecha_fin, {:use_month_names => ["Enero","Febrero","Marzo","Abirl","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]},:type => "date", :class => "datepicker" %>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="actions" style="text-align:center">
+    <%= f.submit "Crear", :class => 'modal-action modal-close waves-effect waves-green btn', :style => "margin-right:5%;color:white" %>
+  
+  <%= link_to 'Atrás', @proyecto, :class => 'modal-action modal-close waves-effect waves-green btn', :style => "margin-left:5%;color:white" %>
+  </div>
+
+  </div>
+<% end %>

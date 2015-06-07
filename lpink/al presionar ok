@@ -1,0 +1,10 @@
+al presionar ok
+
+	push al vector que contiene las actas
+	push al vector de asistencia
+	actualizar totalItems -> gatilla la actualizacion del paginador
+
+	al actualizar el paginador, 
+		obtener el nuevo vector actas
+		Obtener el nuevo vector asistencia
+

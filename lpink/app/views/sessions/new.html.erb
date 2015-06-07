@@ -1,0 +1,35 @@
+<div style="width:40%;margin:0 auto;text-align:center;">
+
+<h3><strong>Iniciar sesión</strong></h3>
+
+<br/>
+	  
+<%= form_tag sessions_path do %>  
+
+
+	<table style="margin:0 auto">
+	<tr>
+		<td width="40%"><%= label_tag :email %></td>
+		<td><%= text_field_tag :email, params[:email], :class => "validate" %></td>
+	</tr>
+	<tr><td colspan="2">&nbsp</td></tr>
+	<tr>
+		<td><%= label_tag :password %></td>
+		<td><%= password_field_tag :password,"", :class => "validate" %></td>
+	</tr>
+	</table>
+
+	<br/>
+	<br/>
+	<div style="text-align:center">
+  <%= submit_tag "Iniciar Sesión", :class => "waves-effect waves-light btn float-left", :style => "color:white" %>
+  <br/>
+  <br/>
+  
+  </div>
+
+<% end %> 
+
+</div>
+
+<br/>

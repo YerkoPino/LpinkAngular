@@ -1,0 +1,36 @@
+<div style="margin:0 auto;width:50%">
+<h3>Perfil de usuario</h3>
+<p>
+	A continuación se muestra la información del usuario de la actual sesión y su foto de perfil.
+</p>
+<br/>
+<h5>Información de usuario</h5>
+<p>
+	Si se desea editar solo el nombre o el e-mail, presione el botón "Editar Información", si se desea cambiar solo la contraseña (o password), presione "Cambiar Contraseña". 
+</p>
+<table>
+	<tr>
+		<td width="15%"><%= label_tag "Nombre: " %></td>
+		<td><%= @participante.participante_nombre %> <%= @participante.participante_apellido %></td>
+	</tr>
+	<tr>
+		<td><%= label_tag "E-mail: " %></td>
+		<td><%= @participante.email %></td>
+	</tr>
+</table>
+<br/>
+
+<div style="text-align:center">
+	
+<br/>
+<h5>Imagen de perfil</h5>
+<p>
+	La aplciación le asigna al usuario una imagen de perfil solicitada a la aplcación Gravatar a través del e-mail del usuario. Si no tiene una cuenta en dicha aplicación, se le asignaŕa una imagen por defecto. Si desea cambiar la imagen de perfil, presione el botón "Cambiar Imagen".
+</p>
+<%= image_tag avatar_url(@user),:size => "200x200", :style => "border:1px solid;vertical-align:middle" %>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<br/>
+<br/>
+<br/>
+<div style="text-align:center"><%= link_to "Volver", proyectos_path,:class => "waves-effect waves-light btn" %></div>
+</div>
