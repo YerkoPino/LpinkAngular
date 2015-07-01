@@ -28,6 +28,9 @@
                     <li><a href="#">Actas</a></li>
                     <li><a href="#">Participantes</a></li>
                     <li><a href="#">Elementos dialógicos</a></li>
+                    <% if current_user %>
+                    <li><%= link_to 'Salir', log_out_path %></li>
+                    <% end %>
                     <li class="divider"></li>
                     
                     <li><a href="#">Seguimiento de acta</a></li>

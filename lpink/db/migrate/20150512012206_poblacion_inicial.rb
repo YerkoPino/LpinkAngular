@@ -16,11 +16,11 @@ class PoblacionInicial < ActiveRecord::Migration
 
   	# Participantes
 
-  	Participante.create( participante_nombre: "Ismael" , participante_apellido: "Vicencio", participante_rut: "176807970", participante_iniciales: "IV", participante_foto: "ismaelVicencio.jpg")
-  	Participante.create( participante_nombre: "Daniel" , participante_apellido: "Vargas", participante_rut: "111111111", participante_iniciales: "DV", participante_foto: "danielVargas.jpg")
-  	Participante.create( participante_nombre: "Camilo" , participante_apellido: "Jimenez", participante_rut: "222222222", participante_iniciales: "CJ", participante_foto: "camiloJimenez.jpg")
-  	Participante.create( participante_nombre: "Gonzalo" , participante_apellido: "Martinez", participante_rut: "333333333", participante_iniciales: "GM", participante_foto: "gonzaloMartinez.jpg")
-    Participante.create( participante_nombre: "Cristobal" , participante_apellido: "Vasquez", participante_rut: "444444444", participante_iniciales: "CV", participante_foto: "perfil.jpg")
+  	Participante.create( participante_nombre: "Ismael" , participante_apellido: "Vicencio", participante_rut: "176807970", participante_iniciales: "IV", participante_foto: "ismaelVicencio.jpg", participante_email: "ismael.vicencio@usach.cl", password: "12345678", password_confirmation: "12345678")
+  	Participante.create( participante_nombre: "Daniel" , participante_apellido: "Vargas", participante_rut: "111111111", participante_iniciales: "DV", participante_foto: "danielVargas.jpg", participante_email: "daniel.vargas@usach.cl", password: "12345678", password_confirmation: "12345678")
+  	Participante.create( participante_nombre: "Camilo" , participante_apellido: "Jimenez", participante_rut: "222222222", participante_iniciales: "CJ", participante_foto: "camiloJimenez.jpg", participante_email: "camilo.jimenez@usach.cl", password: "12345678", password_confirmation: "12345678")
+  	Participante.create( participante_nombre: "Gonzalo" , participante_apellido: "Martinez", participante_rut: "333333333", participante_iniciales: "GM", participante_foto: "gonzaloMartinez.jpg", participante_email: "gonzalo.martinez@usach.cl", password: "12345678", password_confirmation: "12345678")
+    Participante.create( participante_nombre: "Cristobal" , participante_apellido: "Vasquez", participante_rut: "444444444", participante_iniciales: "CV", participante_foto: "perfil.jpg", participante_email: "cristobal.vasquez@usach.cl", password: "12345678", password_confirmation: "12345678")
   	# Acta
 
   	Actum.create( proyecto_id: "1" , acta_fecha: "2015-05-10", acta_inicio: "19:30:00", acta_termino: '20:00:00', acta_correlativo: "1")
