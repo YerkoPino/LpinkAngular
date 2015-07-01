@@ -1,1 +1,0 @@
-angular.module('principalModule', ['ui.bootstrap', 'ngAnimate' , 'ngResource']);
