@@ -1,0 +1,452 @@
+<div id="ResumenMinuta", class="container" ng-controller="actasController">
+
+	<div class="row">
+		<div class="col-md-4">
+			<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">  
+			Resumen  
+			<span class="fa fa-chevron-down"></span>
+			</button>
+		</div>
+		<div class="col-md-8">
+			<pagination ng-model="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit" class="pagination-sm" boundary-links="true" next-text="Siguiente" previous-text="Anterior" first-text="Primera" last-text="Ultima"></pagination>
+		</div>
+	</div>
+
+	<div collapse="isCollapsed">
+		<div class="container">
+		<!-- Aqui va el controlador que listas las actas-->
+					<ul>
+
+					<!-- Se define modal para nueva acta -->
+
+						<div ng-controller="ModalDemoCtrl" class="container">
+						    <script type="text/ng-template" id="myModalContent.html">
+						        <div class="modal-header">
+						            <h3 class="modal-title fa fa-comments fa-lg">  Crear Acta Nº {{nuevaActa}}</h3>
+						        </div>
+						        <div class="modal-body container-fluid morado-rosado">
+
+						        	<p class="input-group">
+						        	  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+						        	  <span class="input-group-btn">
+						        	    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+						        	  </span>
+						        	</p>
+
+						        	<div class="container-fluid blanco">
+						        	<div class="row-fluid">
+						        	<div class="col-md-6">
+						        	<timepicker ng-model="mytimeInicio" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+						        	<div class="alert alert-info" style="width:100%"> Hora de Inicio: {{mytimeInicio | date:'shortTime' }}</div>
+						        	</div>
+						        	<div class="col-md-6">
+						          	<timepicker ng-model="mytimeTermino" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+						          	<div class="alert alert-info"> Hora de Termino: {{mytimeTermino | date:'shortTime' }}</div>
+						          	</div>
+						          	</div>
+						        	</div>
+
+						        	<div id="Participantes" class="container-fluid blanco"> 
+										<h3> Particpantes presentes </h3>
+										<ul>
+											<li ng-repeat="data in usuariosSeleccionados">
+											<input type="checkbox" ng-model="data.estado" checklist-value="role"> {{data.participante_iniciales}} Asistencia: {{data.estado}}
+											</li>
+										</ul>
+
+						        	</div>
+									<div class="container-fluid blanco">
+
+						          	 <p> Pertenece Al proyecto:  {{proyecto}} </p>
+						          	 <p> La ultima acta es: {{actaFinal}}</p>
+
+						          	 </div>
+
+						        </div>
+
+
+						        <div class="modal-footer">
+						            <button class="btn btn-primary fa fa-check fa-lg" ng-click="ok()">  OK</button>
+						            <button class="btn btn-danger fa fa-times fa-lg" ng-click="cancel()">  Cancel</button>
+						        </div>
+						    </script>
+
+						    <button class="btn-floating btn-large waves-effect waves-light yellow" ng-click="open()">  Nueva Acta</button>
+				
+						</div>
+						<li  ng-repeat="data in datos | filter:call" >
+						<h4>Acta numero: {{data.acta_correlativo}}</h4>
+						<div class="conteiner">
+						<div class="alert alert-info" >Fecha: {{ data.acta_fecha | utc | date:'dd-MMMM-yyyy' }}</div>
+						<div class="alert alert-info">Hora de Inicio: {{ data.acta_inicio | utc | date:'shortTime' }}</div>
+						<div class="alert alert-info">Hora de Inicio: {{ data.acta_termino | utc | date:'shortTime' }}</div>
+						
+
+						</div>
+						<h5>Asistentes:</h5>
+
+							<ul>
+								<li ng-repeat="a in user | filter:presente">
+									<style>
+									    /* Specify styling for tooltip contents */
+									    .tooltip.customClass .tooltip-inner {
+									        color: #880000;
+									        background-color: #ffff66;
+									        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+									    }
+									    /* Hide arrow */
+									    .tooltip.customClass .tooltip-arrow {
+									        display: none;
+									    }
+									</style>
+									<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' /> " tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}} </a>
+
+
+								</li>
+							</ul>
+
+						<h5>Ausentes: </h5>
+							<ul>
+								<li ng-repeat="a in user | filter:ausente">
+									 <style>
+									 						    /* Specify styling for tooltip contents */
+									 						    .tooltip.customClass .tooltip-inner {
+									 						        color: #880000;
+									 						        background-color: #ffff66;
+									 						        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+									 						    }
+									 						    /* Hide arrow */
+									 						    .tooltip.customClass .tooltip-arrow {
+									 						        display: none;
+									 						    }
+									 						</style>
+
+									 						<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' />" tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}} </a>
+
+
+
+								</li>
+							</ul>
+						<h5>Pendientes:</h5>
+							<ul>
+								<li ng-repeat="elemento in dialogicos | filter:pendiente">
+
+									<p>
+									        <style>
+									            /* Specify styling for tooltip contents */
+									            .tooltip.customClass .tooltip-inner {
+									                color: #880000;
+									                background-color: #ffff66;
+									                box-shadow: 0 6px 12px rgba(0,0,0,.175);
+									            }
+									            /* Hide arrow */
+									            .tooltip.customClass .tooltip-arrow {
+									                display: none;
+									            }
+									        </style>
+									        <a href="" tooltip-html-unsafe="Elemento: {{elemento.dialogico_nombre}} Tema: {{elemento.tema_id}}" tooltip-class="customClass">{{elemento.actum_id}}.{{elemento.dialogico_correlativo}} {{elemento.dialogico_nombre}} </a>
+									    </p>									
+								</li>
+							</ul>
+
+						<h5>Tabla: </h5>
+					          
+						</li>
+					</ul>					
+		</div> 
+	</div>
+</div>
+
+<div id="Grupo3", class="container" ng-controller="actasController">
+
+	<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">  
+	Resumen  
+	<span class="fa fa-chevron-down"></span>
+	</button>
+	<div collapse="isCollapsed" style="overflow:scroll;">
+		<div class="container blanco" >	
+
+	
+		<br>
+		<br>
+<div ng-repeat="info in datos"  >
+<table class= "table-condensed">
+	<thead>
+		<th>
+
+  <style>
+	.tooltip.customClass .tooltip-inner {
+		color: #880000;
+		background-color: #ffff66;
+		box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	}
+									            
+	.tooltip.customClass .tooltip-arrow {
+		display: none;
+	}
+	</style>
+
+
+
+<div class= "button-large"   href="" tooltip-html-unsafe="Acta numero: {{info.acta_correlativo}} <br>
+Fecha: {{info.acta_fecha}} " tooltip-class="customClass"
+
+ >Acta: {{info.acta_correlativo}}</div>
+		</th>
+	</thead>
+	<tbody>
+	<tr>
+		 <style>
+			.tooltip.customClass .tooltip-inner {
+				color: #880000;
+				background-color: #ffff66;
+				box-shadow: 0 6px 12px rgba(0,0,0,.175);
+									            }
+									            
+			.tooltip.customClass .tooltip-arrow {
+				display: none;
+									            }
+		</style>
+		<td>
+	<span ng-repeat="elem in dialogicos | filter: {actum_id: info.id} : true" ng-switch on ="elem.tipo_elemento_id" >
+
+		
+			<div  ng-switch-when="1" class ="button-floating-blue" href="" tooltip-html-unsafe="Elemento: {{elem.dialogico_nombre}} <br> Tema: {{elem.tema_id}} <br> Estado: {{elem.dialogico_estado}}" tooltip-class="customClass">  	<p class="centro"> AC </p> 
+			</div> 
+			<div  ng-switch-when="2" class ="button-floating-yellow" href="" tooltip-html-unsafe="Elemento: {{elem.dialogico_nombre}}<br> Tema: {{elem.tema_id}} <br>Estado: {{elem.dialogico_estado}}" tooltip-class="customClass">  	<p class="centro">  DE </p> 
+			</div> 
+			<div  ng-switch-when="3" class ="button-floating-green" href="" tooltip-html-unsafe="Elemento: {{elem.dialogico_nombre}}<br> Tema: {{elem.tema_id}} <br>Estado: {{elem.dialogico_estado}}" tooltip-class="customClass"> 	<p class="centro">  DU </p>  
+			</div> 
+			<div  ng-switch-when="4" class ="button-floating-red" href="" tooltip-html-unsafe="Elemento: {{elem.dialogico_nombre}}<br> Tema: {{elem.tema_id}}<br> Estado: {{elem.dialogico_estado}}" tooltip-class="customClass"> 	<p class="centro">  CO </p> 
+			</div> 
+		
+
+<!-- -->
+	</span>
+	</td>
+<br>
+</tr>
+	</tbody>
+
+</table>
+</div >
+
+<br>
+<br>
+
+
+
+
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="Desarrollo-Sintesis", class="container-fluid " ng-controller="CollapseDemoCtrl">
+
+	<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+	Desarrollo
+	<span class="fa fa-chevron-down"></span>
+	</button>
+
+	<div collapse="isCollapsed">
+
+		<div class="well well-lg">
+			<div class="row">
+				
+				<div id="desarrollo" class="blanco col-md-8">
+					      <div class="alert alert-success" role="alert">Desarrollo: click en el recuadro para comenzar...</div>
+				                 <%= tinymce_assets %>
+				             <div class=" panel panel-primary">        
+				          <div class="editable" id= "inputText" contenteditable>
+				             </div>
+				            </div>
+				                <%= tinymce %>
+				            </div>
+				
+
+				<div id="Sintesis" class="col-md-4">		
+					 <div class="alert alert-success">Síntesis</div>
+		              <div class="editable2" id="sintesis"> 
+		              </div> 
+				</div>	
+				</div>
+			</div>
+		</div> 
+	 <p>...</p>
+	</div>
+
+	<!--  Funciones del menu contextual -->
+
+    <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none" >
+        <li onClick=" GetSelectedTextComp()"><a href="#inputText" tabindex="-1" > <FONT style="color:blue;"><span class="fa fa-clock-o"></FONT></span> Crear a Compromisos</a></li>
+        <li onClick=" GetSelectedTextAcu()"><a  href="#inputText" tabindex="-1" ><FONT style="color:green;"><span class="fa fa-check-circle"></FONT></span> Crear a Acuerdos</a></li>
+        <li onClick=" GetSelectedTextDude()" ><a  href="#inputText" tabindex="-1" ><FONT style="color:yellow;"><span class="fa fa-question-circle"></FONT></span> Crear a Dudas</a></li>
+        <li class="divider"></li>
+        <li onClick=" GetSelectedTextDesacu()" ><a href="#inputText" tabindex="-1" ><FONT style="color:red;"><span class="fa  fa-exclamation-triangle"></FONT></span> Crear a Desacuerdos</a></li>
+        <li onClick=" GetSelectedTextDesacu()" ><a href="#inputText" tabindex="-1" ><FONT style="color:red;"><span class="fa  fa-exclamation-triangle"></FONT></span> Crear a Tema</a></li>
+    </ul>
+
+
+  <%= javascript_include_tag 'main' %>
+ 
+ <script>
+ tinymce.init({
+    selector: "div.editable",
+     toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+    inline: true,
+    plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen",
+ 
+    ],
+ 
+});
+        var compromisos= 0;
+        var acuerdos = 0;
+        var dudas = 0;
+        var desacuerdos = 0;
+    function GetSelectedTextComp (e) {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+               
+                var sel = document.getSelection();
+                compromisos++;
+
+                 $("#sintesis").append('<div class="alert alert-default alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="title"> <a href="#'+compromisos+'comp'+'">'+compromisos+".Compromisos: "+sel +"</a>");
+                var texto=tinyMCE.get('inputText').getContent()
+          
+                texto = texto.replace(sel,'<span id="'+compromisos+'comp'+'">'+ sel + '</span>');;
+                tinyMCE.get('inputText').setContent(texto);
+                  
+            }
+             e.preventDefault();  
+        }
+        function GetSelectedTextAcu () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                acuerdos++;
+                 $("#sintesis").append('<div class="alert alert-default alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="title"> <a href="#'+acuerdos+'acu'+'">'+acuerdos+".Acuerdos: "+sel +"</a>");
+            
+                 var texto=tinyMCE.get('inputText').getContent()
+          
+                texto = texto.replace(sel,'<span id="'+acuerdos+'acu'+'">'+ sel + '</span>');;
+                tinyMCE.get('inputText').setContent(texto);
+                  
+            } 
+            
+        }
+        function GetSelectedTextDude () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                dudas++;
+                 $("#sintesis").append('<div class="alert alert-default alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="title"> <a href="#'+dudas+'dude'+'">'+dudas+".Dudas: "+sel +"</a>");
+                  
+                var texto=tinyMCE.get('inputText').getContent()
+          
+                texto = texto.replace(sel,'<span id="'+dudas+'dude'+'">'+ sel + '</span>');;
+                tinyMCE.get('inputText').setContent(texto);
+            } 
+        }
+        function GetSelectedTextDesacu () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                 desacuerdos++;
+                 $("#sintesis").append('<div class="alert alert-default alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="title"><a href="#'+desacuerdos+'desa'+'">'+desacuerdos+".Desacuerdo: "+sel +"</a>");
+            
+                var texto=tinyMCE.get('inputText').getContent()
+          
+                texto = texto.replace(sel,'<span id="'+desacuerdos+'desa'+'">'+ sel + '</span>');;
+                tinyMCE.get('inputText').setContent(texto);
+            } 
+        }
+
+ function SelectText(element) {
+    var doc = document
+        , text = doc.getElementById(element)
+        , range, selection
+    ;    
+    if (doc.body.createTextRange) {
+        range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    } else if (window.getSelection) {
+        selection = window.getSelection();        
+        range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+}
+  (function ($, window) {
+        $.fn.contextMenu = function (settings) {
+            return this.each(function () {
+                // Open context menu
+                $(this).on("contextmenu", function (e) {
+                    // return native menu if pressing control
+                    if (e.ctrlKey) return;
+                    
+                    //open menu
+                    $(settings.menuSelector)
+                        .data("invokedOn", $(e.target))
+                        .show()
+                        .css({
+                            position: "absolute",
+                            left: getMenuPosition(e.clientX, 'width', 'scrollLeft'),
+                            top: getMenuPosition(e.clientY, 'height', 'scrollTop')
+                        })
+                        .off('click')
+                        .on('click', function (e) {
+                            $(this).hide();
+                    
+                            var $invokedOn = $(this).data("invokedOn");
+                            var $selectedMenu = $(e.target);
+                            
+                            settings.menuSelected.call(this, $invokedOn, $selectedMenu);
+                    });
+                    
+                    return false;
+                });
+                //make sure menu closes on any click
+                $(document).click(function () {
+                    $(settings.menuSelector).hide();
+                });
+            });
+            
+            function getMenuPosition(mouse, direction, scrollDir) {
+                var win = $(window)[direction](),
+                    scroll = $(window)[scrollDir](),
+                    menu = $(settings.menuSelector)[direction](),
+                    position = mouse + scroll;
+                            
+                // opening menu would pass the side of the page
+                if (mouse + menu > win && menu < mouse) 
+                    position -= menu;
+                
+                return position;
+            }    
+        };
+    })(jQuery, window);
+    $("#inputText").contextMenu({
+        menuSelector: "#contextMenu",
+        menuSelected: function (invokedOn, selectedMenu) {
+              var msg = "You selected the menu item '" + selectedMenu.text() +
+              "' on the value '" + invokedOn.text() + "'";
+             
+        }
+    });
+  </script>
+
+
+
+
+

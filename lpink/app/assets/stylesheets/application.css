@@ -1,0 +1,273 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+ *= require_self
+ *= require bootstrap/dist/css/bootstrap
+ *= require paletaColores.css
+ *= require font-awesome/css/font-awesome
+ *= require_tree .
+ */
+
+.fa.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+
+.menupad{
+  padding-left: 20px;
+ }
+.btn{
+  background-color: #C9006E;
+}
+
+ .adaptarLogo{
+    width: 17%;
+    height: 300%;
+    padding-bottom: 30px;
+
+}
+.adaptarAvatar{
+    width: 50%;
+
+
+}
+ .adaptarImg{
+    width: 10%;
+    height: 10%;
+
+}
+.adaptarLogo2{
+    width: 80%;
+    height: 80%;
+
+}
+
+
+.morado-rosado{
+	background-color:#870058;
+}
+.rosado-fuerte{
+	background-color:#C9006E;
+}
+.gris-claro{
+	background-color:#EEE2DF;
+}
+.morado-claro{
+	background-color:#D7BCC8;
+}
+.cafe-claro{
+	background-color:#D3AB9E;
+}
+
+.blanco{
+	background-color:#FFFFFF;
+
+}
+
+.navbar-warning{
+  border-top: 10px solid #870058!important;
+ /* border-bottom: 1px solid #ddd!important; */
+  height: 70px;
+  box-shadow: 1px 1px 20px #888888;
+}
+.navbar-warning a{
+
+  color:  #FFFFFF!important;
+
+}
+.navbar-warning a:hover { 
+    background-color: #870058!important;
+}
+.navbar-warning a:focus {
+    background-color: #870058!important;
+}
+.navbar-warning a:active {
+    background-color: #870058!important;
+}
+.navbar-warning a:visited {
+    background-color: #870058!important;
+}
+
+
+.nav li ul {
+background: none repeat scroll 0 0 #C9006E;
+border-color: -moz-use-text-color #C3C3C3 #C3C3C3;
+border-right: 1px solid #C3C3C3;
+}
+
+ 
+  .editable { 
+    height: 500px;
+    margin: 20px;
+    font-size: 20px;
+    overflow: auto;
+  } 
+  .editable2 { 
+    height: 542px;
+    
+    font-size: 20px;
+    overflow: auto;
+    border-bottom: 1px solid #C3C3C3;
+    border-top: 1px solid #C3C3C3;
+    border-right: 1px solid #C3C3C3;
+    border-left: 1px solid #C3C3C3;
+  
+  } 
+
+
+  .alert-info {
+
+    width: 20%!important;
+  }
+
+.button, .button-large, .button-flat {
+  display: inline-block;
+  height: 36px;
+  margin-bottom: 15px;
+  padding: 0 2rem;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-clip: padding-box;
+  line-height: 36px;
+  text-transform: uppercase;
+  border: none;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent; }
+
+.button.disabled, .disabled.button-large, .button-floating.disabled, .button-large.disabled, .button:disabled, .button-large:disabled, .button-large:disabled, .button-floating:disabled {
+  background-color: #DFDFDF;
+  box-shadow: none;
+  color: #9F9F9F;
+  cursor: default; }
+  .button.disabled:hover, .disabled.button-large:hover, .button-floating.disabled:hover, .button-large.disabled:hover, .button:disabled:hover, .button-large:disabled:hover, .button-large:disabled:hover, .button-floating:disabled:hover {
+    background-color: #DFDFDF;
+    color: #9F9F9F; }
+
+.button i, .button-large i, .button-floating i, .button-large i, .button-flat i {
+  font-size: 1.3rem;
+  line-height: inherit; }
+
+.button, .button-large {
+  text-decoration: none;
+  color: #FFF;
+  background-color: #C9006E;
+  text-align: center;
+  letter-spacing: 0.5px;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  cursor: pointer; }
+  .button:hover, .button-large:hover {
+    background-color: #2bbbad; }
+
+.button-floating-red{
+  display: inline-block;
+  color: #FFF;
+  position: relative;
+  z-index: 1;
+  width: 37px;
+  height: 37px;
+  line-height: 37px;
+  padding: 0;
+  background-color: #FF212F;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer; }
+
+
+.button-floating-yellow{
+  display: inline-block;
+  color: #FFF;
+  position: relative;
+  z-index: 1;
+  width: 37px;
+  height: 37px;
+  line-height: 37px;
+  padding: 0;
+  background-color: #FFF667;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer; }
+
+.button-floating-green{
+  display: inline-block;
+  color: #FFF;
+  position: relative;
+  z-index: 1;
+  width: 37px;
+  height: 37px;
+  line-height: 37px;
+  padding: 0;
+  background-color: #0CE87A;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer; }
+
+.button-floating-blue{
+  display: inline-block;
+  color: #FFF;
+  position: relative;
+  z-index: 1;
+  width: 37px;
+  height: 37px;
+  line-height: 37px;
+  padding: 0;
+  background-color: #3881E8;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer; }
+
+.centro{
+  text-align: center; }
