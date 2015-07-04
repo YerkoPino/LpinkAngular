@@ -10,9 +10,9 @@ class PoblacionInicial < ActiveRecord::Migration
 
   	# Proyecto
 
-  	Proyecto.create( proyecto_nombre: "L-pink" )
-  	Proyecto.create( proyecto_nombre: "SendFast" )
-  	Proyecto.create( proyecto_nombre: "Aldea Animal" )
+  	Proyecto.create( proyecto_nombre: "L-pink", proyecto_descripcion: "Aplicación encargada de la gestión de actas dialógicas de un proyecto.")
+  	Proyecto.create( proyecto_nombre: "SendFast", proyecto_descripcion: "Aplicación encargada de calcular diferentes rutas para el despacho de una empresa de transportes.")
+  	Proyecto.create( proyecto_nombre: "Aldea Animal", proyecto_descripcion: "Aplicación encargada de gestionar las horas de atención de una clínica veterinaria.")
 
   	# Participantes
 

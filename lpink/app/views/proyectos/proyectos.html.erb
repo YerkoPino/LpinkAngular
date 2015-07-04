@@ -1,0 +1,17 @@
+<h3>Proyectos</h3>
+
+<div id="Proyectos" class="container" ng-controller="proyectosController">
+
+<br/>
+<ul>
+	<li ng-repeat="p in proyectos">
+		<a href="http://localhost:3000/actas_home?id={{p.id}}">{{p.proyecto_nombre}}</a>
+		<br/>
+		Descripción: {{p.proyecto_descripcion}}
+		<br/>
+		<br/>
+	</li>
+</ul>
+</div>
+<br/>
+<br/>

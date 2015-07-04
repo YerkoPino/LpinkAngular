@@ -95,7 +95,8 @@ console.log($scope.usuariosSeleccionados);
     $scope.mytimeTermino.setMinutes(minutosInicio);
 
 //  Datos para crear una nueva acta
-    $scope.proyecto = DataService.getProyecto();
+    //$scope.proyecto = DataService.getProyecto();
+    $scope.proyecto = document.location.href.split('=')[1];
     $scope.actaFinal = DataService.getActaCorrelativo();
     $scope.nuevaActa = $scope.actaFinal + 1;
     $scope.fecha;

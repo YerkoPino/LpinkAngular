@@ -2,13 +2,13 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
 
 
 
-
+ 
   // Variables de datos 
   $scope.datos = [] // Todas las actas del proyecto actual
   $scope.cantidadActas = 1; // Contiene la cantidad de actas en total del proyecto
   $scope.cantidadusuarios = 0;
   $scope.cantidadusuariosActual = 0;
-  $scope.proyecto = 1; // Contiene el id del proyecto actual
+  $scope.proyecto = document.location.href.split('=')[1]; // Contiene el id del proyecto actual
 
   // Almacena los usuarios del proyecto
   // Solo se utiliza como base para pasar asistencia en cada acta
@@ -45,9 +45,10 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
     $scope.cantidadActas = $http.get('acta/cantidadActas.json?parametro='+$scope.proyecto).success(function(data){
 
               // Se obtiene informacion del proyecto, como ejemplo se asigna el valor 1
+              //DataService.ActualizarProyecto(1);
               DataService.ActualizarProyecto(1);
               // Se obtiene el proyecto sobre el cual se desea desplegar la informacion
-              $scope.proyecto = DataService.getProyecto();
+              //$scope.proyecto = DataService.getProyecto();
 
               // Se obtiene la informacion inicial de las actas
 
@@ -55,7 +56,8 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
               DataService.ActualizarActaActiva(1);
 
               // Se obtienen todas las actas de un proyecto dado     
-              $scope.datos = DataService.getActas.query();
+              $scope.datos = DataService.getActas.query({parametro: $scope.proyecto});
+
               // Se almacenan las actas en el service para que esten disponibles para todos los controladores
 
               angular.forEach($scope.datos, function(item) {
@@ -64,7 +66,7 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
 
               });
               
-              // Se obtiene la cantidad de actas del prooyecto
+              // Se obtiene la cantidad de actas del proyecto
               //$scope.cantidadActas = DataService.getCantidad2;
               //$scope.cantidadActas = DataService.getActas.query.length-1;
 
@@ -85,7 +87,7 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
 
               // Se obtienen los datos sobre los usuarios y su participacion en la acta
 
-              $scope.user = DataService.getUsers.query();
+              $scope.user = DataService.getUsers.query({argumento1: $scope.proyecto});
               // Se almacenan los usuarios en el service
 
 
@@ -96,7 +98,8 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
               
 
               // Se obtiene la informacion sobre los usuarios del proyecto
-              $scope.usuariosProyecto = DataService.getUsersProyectos.query();
+              //$scope.usuariosProyecto = DataService.getUsersProyectos.query();
+              $scope.usuariosProyecto = DataService.getUsersProyectos.query({proyecto: $scope.proyecto});
               angular.forEach($scope.usuariosProyecto, function(){
                 $scope.cantidadusuarios = $scope.cantidadusuarios + 1;
               });
@@ -155,8 +158,8 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
         if($scope.cantidadusuarios  == $scope.cantidadusuariosActual){
           console.log('Entro!!!');
           $scope.totalItems = $scope.totalItems + 1;
-          $scope.datos = DataService.getActas.query();
-          $scope.user = DataService.getUsers.query();
+          $scope.datos = DataService.getActas.query({parametro: $scope.proyecto});
+          $scope.user = DataService.getUsers.query({argumento1: $scope.proyecto});
           $scope.cantidadActas = $scope.cantidadActas + 1;
           DataService.ActualizaActaCorrelativo($scope.cantidadActas);
           $scope.cantidadusuariosActual = 0;

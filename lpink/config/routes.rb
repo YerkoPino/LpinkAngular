@@ -96,7 +96,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get "proyectos_home" => "principal#principal", :as => "proyectos_home"  
+  get "actas_home" => "principal#principal", :as => "actas_home" 
+  get "proyectos" => "proyectos#proyectos", :as => "proyectos"
 
   get "log_in" => "sessions#new", :as => "log_in"  
   get "log_out" => "sessions#destroy", :as => "log_out"  

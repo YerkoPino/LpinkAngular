@@ -4,6 +4,7 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 
 	// Contiene el proyecto actual sobre el cual se trabaja
 	factory.proyectos = 1; 
+	//factory.proyecto = parseInt(document.location.href.split('=')[1]);
 
 	// Contiene el acta actual de trabajo
 	factory.ActaActiva = 1;
@@ -126,7 +127,11 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 
 	// Obtiene todas las actas y sus datos correspondientes para un proyecto X
 
-	factory.getActas = $resource('acta/index.json?parametro='+factory.proyectos, {}, {
+	//factory.getActas = $resource('acta/index.json?parametro='+factory.proyectos, {}, {
+    //    'query': {method: 'GET', isArray: true}
+    //});
+
+	factory.getActas = $resource('acta/index.json?', {}, {
         'query': {method: 'GET', isArray: true}
     });
 
@@ -148,12 +153,18 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 
 	})
 
-	factory.getUsers = $resource('principal/usuarios.json?argumento1='+factory.proyectos,{},{
+	//factory.getUsers = $resource('principal/usuarios.json?argumento1='+factory.proyectos,{},{
+	//	'query': {method: 'GET', isArray: true}
+
+	//})
+
+	factory.getUsers = $resource('principal/usuarios.json?',{},{
 		'query': {method: 'GET', isArray: true}
 
 	})
 
-	factory.getUsersProyectos = $resource('principal/usuariosProyecto.json?proyecto='+1,{},{
+	//factory.getUsersProyectos = $resource('principal/usuariosProyecto.json?proyecto='+1,{},{
+	factory.getUsersProyectos = $resource('principal/usuariosProyecto.json?',{},{
 		'query': {method: 'GET', isArray: true}
 
 	})
@@ -167,6 +178,10 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 	factory.getAlgo = $resource('pagina para obtener el recurso',{},{
 		'query': {method: 'GET', isArray: true}
 
+	})
+
+	factory.getProyectos = $resource('proyectos/index.json',{},{
+		'query': {method: 'GET', isArray: true}
 	})
 
 	factory.ActualizarProyecto = function (id){

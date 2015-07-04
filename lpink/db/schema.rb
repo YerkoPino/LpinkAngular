@@ -80,8 +80,9 @@ ActiveRecord::Schema.define(version: 20150513110010) do
 
   create_table "proyectos", force: :cascade do |t|
     t.string   "proyecto_nombre"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "proyecto_descripcion"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "temas", force: :cascade do |t|

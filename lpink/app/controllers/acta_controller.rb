@@ -27,6 +27,7 @@ class ActaController < ApplicationController
 		def index
 			
 	    @argumentos = params[:parametro]
+	    puts 'ID DEL PROYECTO: '+ params[:parametro]
 	    @Actas = Actum.where( :proyecto_id => @argumentos)
 
 	    respond_to do |format|

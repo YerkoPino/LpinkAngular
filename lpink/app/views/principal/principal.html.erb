@@ -1,5 +1,5 @@
 <div id="ResumenMinuta", class="container" ng-controller="actasController">
-
+<p>pro: {{proyecto}}</p>
 	<div class="row">
 		<div class="col-md-4">
 			<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">  
@@ -99,7 +99,7 @@
 									        display: none;
 									    }
 									</style>
-									<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' /> " tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}} </a>
+									<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' /> " tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}}</a>
 
 
 								</li>
@@ -121,7 +121,7 @@
 									 						    }
 									 						</style>
 
-									 						<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' />" tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}} </a>
+									 						<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' />" tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}}</a>
 
 
 
@@ -189,9 +189,9 @@
 
 
 <div class= "button-large"   href="" tooltip-html-unsafe="Acta numero: {{info.acta_correlativo}} <br>
-Fecha: {{info.acta_fecha}} " tooltip-class="customClass"
+Fecha: {{info.acta_fecha}} " tooltip-class="customClass" >
 
- >Acta: {{info.acta_correlativo}}</div>
+	Acta: {{info.acta_correlativo}}</div>
 		</th>
 	</thead>
 	<tbody>
@@ -301,6 +301,7 @@ Fecha: {{info.acta_fecha}} " tooltip-class="customClass"
   <%= javascript_include_tag 'main' %>
  
  <script>
+
  tinymce.init({
     selector: "div.editable",
      toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
