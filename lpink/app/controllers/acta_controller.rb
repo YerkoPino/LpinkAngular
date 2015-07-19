@@ -24,19 +24,18 @@ class ActaController < ApplicationController
 	end
 
 
-		def index
-			
+	def index
+		
 	    @argumentos = params[:parametro]
-	    puts 'ID DEL PROYECTO: '+ params[:parametro]
 	    @Actas = Actum.where( :proyecto_id => @argumentos)
 
 	    respond_to do |format|
 	      format.json { render json: @Actas }
 	    end
 
-		end
+	end
 
-	  def cantidadActas
+  	def cantidadActas
 
 	    @argumentos = params[:parametro]
 	    @Actas = Actum.where( :proyecto_id => @argumentos).count
@@ -46,7 +45,7 @@ class ActaController < ApplicationController
 	    end
 
 
-	  end
+  	end
 
 
 	# Parametros privados para crear una nueva acta

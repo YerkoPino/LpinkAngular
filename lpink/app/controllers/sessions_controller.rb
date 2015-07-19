@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
+
   def new
+    if current_user
+      redirect_to proyectos_path
+    end
   end
 
   def create  

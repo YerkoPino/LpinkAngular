@@ -1,11 +1,60 @@
-<h3>Proyectos</h3>
+<h3 style="margin-left:3%"><strong>Proyectos</strong></h3>
 
 <div id="Proyectos" class="container" ng-controller="proyectosController">
 
 <br/>
+
+<div ng-controller="AbrirNuevoProyecto" class="container" >
+	<script type="text/ng-template" id="nuevoProyecto.html">
+
+		<div class="modal-header">
+			<h3 class="modal-title fa fa-comments fa-lg">  Crear Nuevo Proyecto</h3>
+		</div>
+
+		<div class="modal-body container-fluid morado-rosado">
+			<div class="container-fluid blanco">
+				<br/>
+				Nombre: <input type="text" ng-model="nombreProyecto" maxlength="50" style="width:80%"/>
+				<br/>
+				<br/>
+				Descripción: 
+				<br/>
+				<textarea class="form-control" ng-model="descripcionProyecto" rows="4" maxlength="200" style="width:100%"/>
+				<br/>
+
+				Participantes: 
+
+				<br/>
+				<br/>
+
+				<div style="overflow:scroll;max-height:200px">
+					<ul>
+						<li ng-repeat="par in agregar">
+							<input type="checkbox" ng-model="par.estado" checklist-value="role"> {{par.nombre}} {{par.apellido}}
+						</li>
+					</ul>
+				</div>
+
+				<br/>
+			</div>
+		</div>
+
+		<div class="modal-footer">
+			<button class="btn btn-primary fa fa-check fa-lg" ng-click="ok()">  OK</button>
+
+			<button class="btn btn-danger fa fa-times fa-lg" ng-click="cancel()">  Cancel</button>
+		</div>
+
+	</script>
+
+	<button class="btn-floating btn-large waves-effect waves-light yellow" ng-click="open()">Nuevo Poryecto</button>
+</div>
+
+<br/>
+
 <ul>
 	<li ng-repeat="p in proyectos">
-		<a href="http://localhost:3000/actas_home?id={{p.id}}">{{p.proyecto_nombre}}</a>
+		<a href="/actas_home?id={{p.id}}">{{p.proyecto_nombre}}</a>
 		<br/>
 		Descripción: {{p.proyecto_descripcion}}
 		<br/>
@@ -15,3 +64,4 @@
 </div>
 <br/>
 <br/>
+

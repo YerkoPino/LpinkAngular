@@ -31,6 +31,10 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 
 	factory.Cambio = 0;
 
+
+	// Almacena todos los particpantes del sistema
+	factory.participantes = [];
+
 	// Funciones para actualizar y obtener informacion de los contenedores globaless
 
 	factory.getCambio = function(){
@@ -124,6 +128,18 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 		return factory.ElementosProyecto;
 	}
 
+	factory.ActualizarParticipante = function(objeto){
+
+		factory.participantes = objeto;
+
+	}
+
+	factory.getTodosParticipantes = function(){
+
+		return factory.participantes;
+
+	}
+
 
 	// Obtiene todas las actas y sus datos correspondientes para un proyecto X
 
@@ -180,7 +196,18 @@ angular.module('principalModule').factory('DataService', ['$resource','$http', f
 
 	})
 
+	//trae todos los proyectos
 	factory.getProyectos = $resource('proyectos/index.json',{},{
+		'query': {method: 'GET', isArray: true}
+	})
+
+	//Trae todos los usuarios del sistema
+	factory.getParticipantes = $resource('participantes/todos.json',{},{
+		'query': {method: 'GET', isArray: true}
+	})	
+
+	//Trae la infomacíon del proyecto actual
+	factory.getProyectoActual = $resource('proyectos/actual.json?',{},{
 		'query': {method: 'GET', isArray: true}
 	})
 

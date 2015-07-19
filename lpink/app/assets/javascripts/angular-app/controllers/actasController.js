@@ -9,6 +9,7 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
   $scope.cantidadusuarios = 0;
   $scope.cantidadusuariosActual = 0;
   $scope.proyecto = document.location.href.split('=')[1]; // Contiene el id del proyecto actual
+  
 
   // Almacena los usuarios del proyecto
   // Solo se utiliza como base para pasar asistencia en cada acta
@@ -29,8 +30,10 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
 
 
   // Base para pasar la asistencia
-  $scope.usuariosProyecto = [];
- 
+  $scope.usuariosProyecto = []; 
+
+  //informacion del proyecto actual
+  $scope.proyectoActual = DataService.getProyectoActual.query({id: $scope.proyecto});
 
   /*  
       Obtiene informacion sobre la cantidad de actas 
@@ -93,9 +96,7 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
 
               angular.forEach($scope.user , function(item){
                 DataService.ActualizarUsuariosProyecto(item);
-
               });
-              
 
               // Se obtiene la informacion sobre los usuarios del proyecto
               //$scope.usuariosProyecto = DataService.getUsersProyectos.query();
@@ -107,7 +108,6 @@ angular.module('principalModule').controller('actasController',[ '$scope' ,'$htt
               DataService.generarUsuariosProyecto($scope.usuariosProyecto);
 
       });
-      
 
 
   // filtros para los ng-repeat    

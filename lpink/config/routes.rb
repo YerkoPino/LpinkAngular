@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
   get 'proyectos/index'
+  post 'proyectos/create'
+  post 'proyectos/createParticipantes'
+  get 'proyectos/actual'
 
   get 'sessions/new'
 
   get 'participantes/new'
+  get 'participantes/todos'
 
 #  scope :api do
 #    resources :principal, only: [:index], defaults: {format: :json}

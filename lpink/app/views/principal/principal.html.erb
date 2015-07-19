@@ -1,5 +1,16 @@
+
+
 <div id="ResumenMinuta", class="container" ng-controller="actasController">
-<p>pro: {{proyecto}}</p>
+
+	<br/>
+	<div ng-repeat="pro in proyectoActual">
+		<h3 style="margin-left:1.5%"><strong>Proyecto: {{pro.proyecto_nombre}}</strong></h3>
+		<br/>
+		
+		<p style="margin-left:1.5%"><strong>Descripción:</strong> {{pro.proyecto_descripcion}}</p>
+		<br/>
+	</div>
+
 	<div class="row">
 		<div class="col-md-4">
 			<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">  
@@ -75,18 +86,21 @@
 				
 						</div>
 						<li  ng-repeat="data in datos | filter:call" >
+												
 						<h4>Acta numero: {{data.acta_correlativo}}</h4>
 						<div class="conteiner">
 						<div class="alert alert-info" >Fecha: {{ data.acta_fecha | utc | date:'dd-MMMM-yyyy' }}</div>
 						<div class="alert alert-info">Hora de Inicio: {{ data.acta_inicio | utc | date:'shortTime' }}</div>
-						<div class="alert alert-info">Hora de Inicio: {{ data.acta_termino | utc | date:'shortTime' }}</div>
+						<div class="alert alert-info">Hora de Término: {{ data.acta_termino | utc | date:'shortTime' }}</div>
+
 						
 
 						</div>
+
 						<h5>Asistentes:</h5>
 
 							<ul>
-								<li ng-repeat="a in user | filter:presente">
+								<li ng-repeat="a in user | filter:presente | filter:{actum_id:data.id}">
 									<style>
 									    /* Specify styling for tooltip contents */
 									    .tooltip.customClass .tooltip-inner {
@@ -107,21 +121,21 @@
 
 						<h5>Ausentes: </h5>
 							<ul>
-								<li ng-repeat="a in user | filter:ausente">
+								<li ng-repeat="a in user | filter:ausente| filter:{actum_id:data.id}">
 									 <style>
-									 						    /* Specify styling for tooltip contents */
-									 						    .tooltip.customClass .tooltip-inner {
-									 						        color: #880000;
-									 						        background-color: #ffff66;
-									 						        box-shadow: 0 6px 12px rgba(0,0,0,.175);
-									 						    }
-									 						    /* Hide arrow */
-									 						    .tooltip.customClass .tooltip-arrow {
-									 						        display: none;
-									 						    }
-									 						</style>
+			 						    /* Specify styling for tooltip contents */
+			 						    .tooltip.customClass .tooltip-inner {
+			 						        color: #880000;
+			 						        background-color: #ffff66;
+			 						        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+			 						    }
+			 						    /* Hide arrow */
+			 						    .tooltip.customClass .tooltip-arrow {
+			 						        display: none;
+			 						    }
+			 						</style>
 
-									 						<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' />" tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}}</a>
+			 						<a href="#" tooltip-html-unsafe="<img src='assets/{{a.participante_foto}}' height='200' width='200' />" tooltip-class="customClass"> {{a.participante_iniciales}}	{{a.participante_nombre}} {{a.participante_apellido}}</a>
 
 
 
@@ -250,7 +264,7 @@ Fecha: {{info.acta_fecha}} " tooltip-class="customClass" >
 
 
 
-
+<br/>
 
 <div id="Desarrollo-Sintesis", class="container-fluid " ng-controller="CollapseDemoCtrl">
 
@@ -258,6 +272,9 @@ Fecha: {{info.acta_fecha}} " tooltip-class="customClass" >
 	Desarrollo
 	<span class="fa fa-chevron-down"></span>
 	</button>
+
+	<br/>
+	<br/>
 
 	<div collapse="isCollapsed">
 
